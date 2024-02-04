@@ -35,4 +35,4 @@ jobs:
           ls -la
 
       - name: Show directory tree
-        run: tree
+        run: tree ./*
