@@ -35,3 +35,4 @@ jobs:
           ls -la
           cd target
           echo "Current directory: $(pwd)"
+          ls -la
