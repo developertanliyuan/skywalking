@@ -12,7 +12,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        
+      - name: Initialize git submodule
+        run: git submodule init
 
+      - name: Update git submodule
+        run: git submodule update
+        
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
