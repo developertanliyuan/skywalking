@@ -28,8 +28,11 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -DskipTests -Dcheckstyle.skip
 
-      - name: Change Dir oap-server
-        run: cd oap-server
+      - name: Navigate to oap-server directory
+        run: |
+          cd oap-server
+          echo "Current directory: $(pwd)"
+          ls -la
 
       - name: Show directory tree
         run: tree
