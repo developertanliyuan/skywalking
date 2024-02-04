@@ -28,5 +28,8 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -DskipTests -Dcheckstyle.skip
 
+      - name: Change Dir oap-server
+        run: cd oap-server
+
       - name: Show directory tree
         run: tree
