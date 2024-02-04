@@ -33,6 +33,8 @@ jobs:
           cd oap-server
           echo "Current directory: $(pwd)"
           ls -la
-
-      - name: Show directory tree
-        run: tree ./*
+      - name: Navigate to target directory
+        run: |
+          cd target
+          echo "Current directory: $(pwd)"
+          ls -la
