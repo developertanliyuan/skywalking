@@ -28,11 +28,5 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -DskipTests -Dcheckstyle.skip
 
-      - name: Navigate to target directory
-        run: |
-          cd oap-server
-          echo "Current directory: $(pwd)"
-          ls -la
-          cd target
-          echo "Current directory: $(pwd)"
-          ls -la
+      - name: Show directory tree
+        run: tree ./*
