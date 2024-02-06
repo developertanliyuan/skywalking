@@ -33,3 +33,10 @@ jobs:
           cd apm-dist/target
           echo "Current directory: $(pwd)"
           ls -la
+          mv apache-skywalking-apm-bin.tar.gz $HOME/apache-skywalking-apm-bin.tar.gz
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: apache-skywalking-apm-bin.tar.gz
+          path: $HOME/apache-skywalking-apm-bin.tar.gz
