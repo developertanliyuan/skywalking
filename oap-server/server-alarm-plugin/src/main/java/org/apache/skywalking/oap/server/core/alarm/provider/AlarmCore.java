@@ -20,6 +20,8 @@ package org.apache.skywalking.oap.server.core.alarm.provider;
 
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
+
 import org.apache.skywalking.oap.server.core.alarm.*;
 import org.joda.time.*;
 import org.slf4j.*;
@@ -58,11 +60,16 @@ public class AlarmCore {
         lastExecuteTime = now;
         Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(() -> {
             try {
+                logger.info("开始执行报警");
                 List<AlarmMessage> alarmMessageList = new ArrayList<>(30);
                 LocalDateTime checkTime = LocalDateTime.now();
                 int minutes = Minutes.minutesBetween(lastExecuteTime, checkTime).getMinutes();
+                logger.info("最后执行时间距离当前时间" + minutes + "分钟");
                 boolean[] hasExecute = new boolean[] {false};
+                String ruleNames = runningContext.keySet().stream().collect(Collectors.joining(","));
+                logger.info("规则名称列表:"+ruleNames);
                 runningContext.values().forEach(ruleList -> ruleList.forEach(runningRule -> {
+
                     if (minutes > 0) {
                         runningRule.moveTo(checkTime);
                         /**
@@ -70,7 +77,12 @@ public class AlarmCore {
                          */
                         if (checkTime.getSecondOfMinute() > 15) {
                             hasExecute[0] = true;
-                            alarmMessageList.addAll(runningRule.check());
+                            List<AlarmMessage> check = runningRule.check();
+                            logger.info("AlarmMessageList.size:" + check.size());
+                            for (AlarmMessage alarmMessage : check) {
+                                logger.info("报警名称:" + alarmMessage.getName() + ",报警信息:" + alarmMessage.getAlarmMessage());
+                            }
+                            alarmMessageList.addAll(check);
                         }
                     }
                 }));
