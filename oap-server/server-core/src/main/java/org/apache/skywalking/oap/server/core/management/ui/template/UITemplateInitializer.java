@@ -90,6 +90,7 @@ public class UITemplateInitializer {
             try {
                 File[] templateFiles = ResourceUtils.getPathFiles("ui-initialized-templates/" + folder.toLowerCase());
                 for (File file : templateFiles) {
+                    log.info("文件名:" + file.getName());
                     initTemplate(file);
                 }
             } catch (FileNotFoundException e) {
