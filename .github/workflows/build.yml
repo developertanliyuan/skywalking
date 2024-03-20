@@ -3,7 +3,7 @@ name: Java Build
 on:
   push:
     branches:
-      - 6.2.0
+      - 6.2.0-dev
 
 jobs:
   build:
