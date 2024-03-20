@@ -35,7 +35,7 @@ jobs:
           mv apache-skywalking-apm-bin.tar.gz ~/apache-skywalking-apm-bin.tar.gz
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4.3.1
         with:
           name: apache-skywalking-apm-bin.tar.gz
           path: ~/apache-skywalking-apm-bin.tar.gz
